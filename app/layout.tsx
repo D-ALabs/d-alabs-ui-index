@@ -38,6 +38,13 @@ export const metadata: Metadata = {
     "The complete component inventory of the D-ALabs site and the Ark membership — tokens, type, buttons, cards, motion, and full patterns.",
 };
 
+// Install the theme-reactive favicon + browser-chrome colour before first paint
+// so the branded SVG icon shows immediately instead of a frame of favicon.ico.
+// The index always mounts in the light "Lab" skin (theme isn't persisted), so
+// the pre-paint default is light; ThemeToggle-style updates then flow through
+// applyThemeChrome() in UIIndexApp. Mirrors the d-alabs-website theme script.
+const THEME_PRELOAD = `(function(){try{var m=document.querySelector('meta[name="theme-color"]');if(!m){m=document.createElement('meta');m.setAttribute('name','theme-color');document.head.appendChild(m);}m.setAttribute('content','#F5F2EA');var f=document.getElementById('dal-favicon');if(!f){f=document.createElement('link');f.id='dal-favicon';f.rel='icon';f.type='image/svg+xml';f.setAttribute('sizes','any');document.head.appendChild(f);}f.setAttribute('href','/favicon-light.svg');document.documentElement.style.colorScheme='light';}catch(e){}})();`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -46,8 +53,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${hankenGrotesk.variable} ${spaceGrotesk.variable} ${spaceMono.variable}`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_PRELOAD }} />
+      </head>
       <body>{children}</body>
     </html>
   );
