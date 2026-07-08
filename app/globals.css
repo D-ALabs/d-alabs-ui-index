@@ -1,0 +1,33 @@
+*{ box-sizing:border-box }
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth }
+body{ margin:0; background:#F5F2EA; color:#16202E; font-family:var(--font-hanken), system-ui, sans-serif; font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; transition:background-color .45s ease }
+a{ color:inherit; text-decoration:none }
+a:hover{ color:inherit }
+h1,h2,h3,h4,p{ margin:0 }
+input,button{ font-family:inherit }
+@keyframes revealUp{ from{ transform:translateY(18px) } to{ transform:translateY(0) } }
+@keyframes floatBob{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-11px) } }
+@keyframes glowPulse{ 0%,100%{ opacity:.55; transform:scale(1) } 50%{ opacity:1; transform:scale(1.07) } }
+@keyframes floatY{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-13px) } }
+@keyframes floatY2{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(12px) } }
+@keyframes ringPulse{ 0%{ transform:scale(.85); opacity:.4 } 70%{ opacity:0 } 100%{ transform:scale(1.5); opacity:0 } }
+@keyframes marquee{ from{ transform:translateX(0) } to{ transform:translateX(-50%) } }
+@keyframes blink{ 0%,45%{ opacity:1 } 55%,100%{ opacity:.25 } }
+@keyframes starGlow{ 0%,100%{ opacity:.5; transform:scale(1) } 50%{ opacity:.95; transform:scale(1.14) } }
+@keyframes twinkle{ 0%,100%{ opacity:.22 } 50%{ opacity:1 } }
+@keyframes shimmer{ 0%{ background-position:180% 0 } 100%{ background-position:-80% 0 } }
+[data-reveal]{ animation:revealUp .85s cubic-bezier(.16,1,.3,1) both }
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto } [data-reveal]{ animation:none !important; opacity:1 !important; transform:none !important } }
+
+/* Hover styles ported from the dc runtime's style-hover attribute.
+   !important is required so they win over the base inline styles,
+   exactly as the runtime's imperative style mutation did. */
+.hov-bd:hover{ border-color:var(--bd-hov) !important }
+.hov-ink:hover{ color:var(--ink) !important }
+.hov-deep-ink:hover{ color:var(--deep-ink) !important }
+.hov-lift:hover{ transform:translateY(-5px) !important; box-shadow:var(--sh-card) !important; border-color:var(--bd-hov) !important }
+.hov-chip:hover{ border-color:var(--deep-ink) !important; background-color:var(--chip-bg) !important }
+.hov-accent:hover{ border-color:var(--accent) !important; background-color:var(--accent-soft) !important }
+.hov-scale:hover{ transform:scale(1.1) !important }
+/* Focus style ported from the dc runtime's style-focus attribute. */
+.foc-accent:focus{ border-color:var(--accent) !important }
